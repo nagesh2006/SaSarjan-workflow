@@ -1,41 +1,343 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light"> <head>
+<html lang="en" data-theme="cupcake">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Website</title>
+    <title>Nagesh Tiwari - Daily Progress</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css"> </head>
-<body>
-    <div class="container mx-auto p-4 md:p-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <header class="text-center mb-12">
-            <img src="photo.png" alt="Nagesh Tiwari" class="w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-4 shadow-lg">
-            <h1 class="text-4xl md:text-5xl font-bold">Your Name</h1>
-            <div class="mt-4 text-lg">
-                <p>Email: <a href="mailto:your.email@example.com" class="link link-hover">nageshti2808@gmail.com</a></p>
-                <p>Phone: <a href="tel:+1234567890" class="link link-hover">+91 77198 91777</a></p>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HV5RFBYSHJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HV5RFBYSHJ');
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.7s ease, color 0.7s ease; /* Smoother theme transition */
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Theme-adaptive background pattern */
+        body[data-theme="cupcake"] {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d1d5db' fill-opacity='0.15'%3E%3Cpath d='M30 0h30v30H30zM0 30h30v30H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        body[data-theme="night"] {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a5568' fill-opacity='0.2'%3E%3Cpath d='M30 0h30v30H30zM0 30h30v30H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .main-container {
+            transition: box-shadow 0.5s ease, background-color 0.7s ease;
+        }
+
+        .btn {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.5s ease, color 0.5s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px); /* More pronounced lift */
+        }
+        /* Ensure buttons have distinct hover states in both themes */
+        body[data-theme="cupcake"] .btn-primary:hover { box-shadow: 0 8px 20px hsla(var(--p)/0.4); }
+        body[data-theme="night"] .btn-primary:hover { box-shadow: 0 8px 20px hsla(var(--p)/0.6); }
+
+
+        .progress-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth cubic-bezier transition */
+            border-left-width: 4px;
+        }
+        .progress-card:hover {
+            transform: translateY(-6px) scale(1.03); /* More pronounced lift and scale */
+        }
+         body[data-theme="cupcake"] .progress-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,0.15); }
+         body[data-theme="night"] .progress-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+
+
+        .border-day-1 { border-left-color: hsl(var(--p)); }
+        .border-day-2 { border-left-color: hsl(var(--s)); }
+        .border-day-3 { border-left-color: hsl(var(--a)); }
+        .border-day-4 { border-left-color: hsl(var(--in)); }
+        .border-day-5 { border-left-color: hsl(var(--wa)); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: hsl(var(--b2)/0.7); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: hsl(var(--b3)); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: hsl(var(--bc)/0.7); }
+
+        .analytics-section {
+            border: 1px solid hsl(var(--b3));
+            background-color: hsl(var(--b2)/0.6);
+            backdrop-filter: blur(8px);
+            transition: background-color 0.7s ease, border-color 0.7s ease;
+        }
+        .analytics-section h3, .analytics-section h4, .analytics-section p, .analytics-section li {
+            color: hsl(var(--bc));
+        }
+        .analytics-section .link {
+            color: hsl(var(--a));
+        }
+
+        /* Entry Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
+        .delay-1000 { animation-delay: 1s; }
+
+
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        },
+        daisyui: {
+            themes: ["cupcake", "night"], // Only include desired themes
+        },
+      }
+    </script>
+</head>
+<body class="bg-base-200 min-h-screen flex flex-col items-center justify-start py-8 px-4">
+
+    <div class="main-container container mx-auto max-w-5xl w-full bg-base-100 shadow-2xl rounded-xl p-6 md:p-10 animate-fade-in">
+
+        <header class="text-center mb-10 md:mb-12 relative animate-slide-in-up delay-100">
+            <div class="absolute top-0 right-0 md:top-2 md:right-2 z-10 flex items-center space-x-2">
+                <button id="themeToggle" class="btn btn-ghost btn-circle tooltip tooltip-left" data-tip="Toggle Theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.364-.75.75M21 12h-2.25m-.364 6.364-.75-.75M12 18.75V21m-6.364-.364.75-.75M3 12H5.25m.364-6.364.75.75M12 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </button>
+            </div>
+
+            <img src="photo.png" alt="Nagesh Tiwari" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 shadow-xl border-4 border-primary object-cover animate-fade-in delay-200">
+            <h1 class="text-3xl md:text-4xl font-bold text-primary animate-slide-in-up delay-300">Nagesh Tiwari</h1>
+            <p class="text-lg md:text-xl text-base-content/90 mt-2 animate-slide-in-up delay-400">Software Development Enthusiast</p>
+            <div class="mt-4 text-base-content/80 text-sm md:text-base space-y-1 animate-slide-in-up delay-500">
+                <p>Email: <a href="mailto:nageshti2808@gmail.com" class="link link-hover text-accent">nageshti2808@gmail.com</a></p>
+                <p>Phone: <a href="tel:+917719891777" class="link link-hover text-accent">+91 77198 91777</a></p>
                 <p>Location: Mumbai, India</p>
             </div>
         </header>
 
-       <main class="text-center">
-        <h2 class="text-2xl font-semibold mb-6">Daily Progress</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <button id="day1-btn" class="btn btn-primary" onclick="window.location.href='https://nagesh2006.github.io/portfolio-plain/'">Day 1</button>
-            <button id="day2-btn" class="btn btn-secondary" onclick="window.location.href='https://nagesh2006.github.io/new-portfolio/'">Day 2</button>
-            <button id="day3-btn" class="btn btn-accent" onclick="window.location.href='https://nagesh2006.github.io/portfolio/'">Day 3</button>
-            <button id="day4-btn" class="btn btn-info" onclick="window.location.href='https://nagesh2006.github.io/teeshub/'">Day 4</button>
-        </div>
-    </main>
+        <main>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-neutral-focus text-center animate-slide-in-up delay-600">Daily Progress Showcase</h2>
 
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10 md:mb-12 animate-slide-in-up delay-700">
+                <button id="day1-btn" class="btn btn-primary btn-block h-16 text-lg shadow-md hover:shadow-lg">Day 1</button>
+                <button id="day2-btn" class="btn btn-secondary btn-block h-16 text-lg shadow-md hover:shadow-lg">Day 2</button>
+                <button id="day3-btn" class="btn btn-accent btn-block h-16 text-lg shadow-md hover:shadow-lg">Day 3</button>
+                <button id="day4-btn" class="btn btn-info btn-block h-16 text-lg shadow-md hover:shadow-lg">Day 4</button>
+                <button id="day5-btn" class="btn btn-warning btn-block h-16 text-lg shadow-md hover:shadow-lg">Day 5</button>
+            </div>
 
-        <footer class="text-center mt-12 py-4 border-t">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <div>
+                <h3 class="text-xl md:text-2xl font-semibold mb-6 text-neutral-focus text-left border-b-2 border-base-300 pb-3 animate-slide-in-up delay-800">Progress Details</h3>
+                <div id="progress-descriptions" class="space-y-6">
+                    </div>
+            </div>
+
+            <section id="analytics-overview" class="mt-12 md:mt-16 p-6 md:p-8 rounded-xl shadow-xl analytics-section animate-fade-in delay-900">
+                <h3 class="text-xl md:text-2xl font-semibold mb-6 text-left border-b-2 border-base-300 pb-3">Live Analytics Report</h3>
+
+                <div class="bg-base-100 p-4 rounded-lg shadow-inner">
+                     <p class="text-sm text-base-content/80 mb-4">
+                        The following is an embedded live report from Google Looker Studio, displaying data from Google Analytics.
+                        <strong class="text-error">Important: This report requires the Looker Studio sharing settings to be "Public on the web" or "Unlisted" for full visibility and data is from date 24/05/2025</strong>
+                    </p>
+                    <div class="aspect-w-16 aspect-h-9 rounded-md overflow-hidden min-h-[450px] md:min-h-[600px] lg:min-h-[700px]"> <iframe
+                            id="lookerStudioEmbed"
+                            width="100%"
+                            height="100%"
+                            src="https://lookerstudio.google.com/embed/reporting/a806fe8d-524b-48af-83bf-b3d1d12d6a06/page/kIV1C"
+                            frameborder="0"
+                            style="border:0; min-height: 450px;"
+                            allowfullscreen
+                            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 md:mt-16 py-8 border-t border-base-300 animate-fade-in delay-1000">
+            <p class="text-base-content/70">&copy; <span id="currentYear"></span> Nagesh Tiwari. All rights reserved.</p>
+            <p class="text-sm text-base-content/60 mt-1">Crafted with <span class="text-error">❤</span> using HTML, Tailwind CSS, and DaisyUI.</p>
         </footer>
 
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dailyProgress = [
+                {
+                    buttonId: 'day1-btn',
+                    url: 'https://nagesh2006.github.io/portfolio-plain/',
+                    title: 'Day 1: Basic Portfolio Foundation',
+                    description: 'Laid the groundwork with a fundamental HTML and CSS structure for the initial portfolio. Focused on semantic HTML and basic styling principles.',
+                    cardClass: 'border-day-1'
+                },
+                {
+                    buttonId: 'day2-btn',
+                    url: 'https://nagesh2006.github.io/new-portfolio/',
+                    title: 'Day 2: Enhanced Portfolio Styling',
+                    description: 'Improved the visual appeal and layout of the portfolio using more advanced CSS techniques, focusing on a cleaner and more professional look.',
+                    cardClass: 'border-day-2'
+                },
+                {
+                    buttonId: 'day3-btn',
+                    url: 'https://nagesh2006.github.io/portfolio/',
+                    title: 'Day 3: Interactive Portfolio Elements',
+                    description: 'Introduced JavaScript to add interactivity, such as dynamic content or navigation enhancements, making the portfolio more engaging for visitors.',
+                    cardClass: 'border-day-3'
+                },
+                {
+                    buttonId: 'day4-btn',
+                    url: 'https://nagesh2006.github.io/teeshub-demo/',
+                    title: 'Day 4: TeeHub Project - Initial Demo',
+                    description: 'Began development of the "TeeHub" project, creating an initial demonstration version. This likely involved setting up the project structure and core features for a T-shirt e-commerce concept.',
+                    cardClass: 'border-day-4'
+                },
+                {
+                    buttonId: 'day5-btn',
+                    url: 'https://nagesh2006.github.io/teeshub/',
+                    title: 'Day 5: TeeHub Refinement & Live Analytics Setup',
+                    description: 'Focused on refining the TeeHub project, improving its UI and responsiveness. Integrated Google Analytics (gtag.js) for tracking. See the "Live Analytics Report" section below for the embedded Google Looker Studio report showcasing site data.',
+                    cardClass: 'border-day-5',
+                    analyticsNote: true
+                }
+            ];
+
+            const descriptionsContainer = document.getElementById('progress-descriptions');
+            if (!descriptionsContainer) {
+                console.error("Error: 'progress-descriptions' container not found.");
+                return;
+            }
+            descriptionsContainer.innerHTML = '';
+
+            dailyProgress.forEach((item) => {
+                const descItem = document.createElement('div');
+                // Added a common class for animation that will be toggled by JS
+                descItem.className = `progress-card p-5 bg-base-100 dark:bg-base-300 rounded-lg shadow-lg hover:shadow-xl ${item.cardClass} animate-slide-in-up`;
+                // Add staggered animation delay
+                descItem.style.animationDelay = `${(dailyProgress.indexOf(item) * 0.1) + 0.9}s`;
+
+
+                let analyticsHtml = '';
+                if (item.analyticsNote && item.buttonId === 'day5-btn') {
+                    analyticsHtml = `
+                        <div class="mt-4 p-3 bg-info/10 text-info-content rounded-md text-sm">
+                            <h5 class="font-semibold mb-1">Analytics Integration:</h5>
+                            <p>Google Analytics tracking is active. For a visual representation of your site data, please refer to the <a href="#analytics-overview" class="link link-info font-semibold hover:underline">Live Analytics Report</a> section further down this page.</p>
+                        </div>
+                    `;
+                }
+
+                descItem.innerHTML = `
+                    <h4 class="font-semibold text-lg md:text-xl text-neutral-content">${item.title}</h4>
+                    <p class="text-base-content/80 mt-2 mb-3 text-sm md:text-base">${item.description}</p>
+                    <a href="${item.url}" target="_blank" class="btn btn-sm btn-outline btn-accent mt-2">
+                        View Project
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                    </a>
+                    ${analyticsHtml}
+                `;
+                descriptionsContainer.appendChild(descItem);
+
+                const button = document.getElementById(item.buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // Remove highlight from all cards first
+                        document.querySelectorAll('.progress-card').forEach(card => {
+                            card.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-base-100');
+                        });
+
+                        const targetElement = descItem;
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        if (item.buttonId === 'day5-btn' && item.analyticsNote) {
+                            setTimeout(() => {
+                                const analyticsSection = document.getElementById('analytics-overview');
+                                if (analyticsSection) {
+                                    analyticsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 700);
+                        }
+
+                        targetElement.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-base-100');
+                        setTimeout(() => {
+                            targetElement.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-base-100');
+                        }, 1500);
+                    });
+                } else {
+                    console.warn(`Button with ID "${item.buttonId}" not found.`);
+                }
+            });
+
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // --- Simplified Theme Toggle Logic (Cupcake <-> Night) ---
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+            const themes = ["cupcake", "night"]; // Only these two themes
+
+            // Set initial theme based on user's preference or default to 'cupcake'
+            const savedTheme = localStorage.getItem('theme') || 'cupcake';
+            htmlElement.setAttribute('data-theme', savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = (currentTheme === 'cupcake') ? 'night' : 'cupcake';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme); // Save preference
+            });
+
+
+            // Set the Looker Studio embed URL (no change needed here for this part)
+            const lookerStudioEmbedIframe = document.getElementById('lookerStudioEmbed');
+            if (lookerStudioEmbedIframe) {
+                lookerStudioEmbedIframe.src = "https://lookerstudio.google.com/embed/reporting/a806fe8d-524b-48af-83bf-b3d1d12d6a06/page/kIV1C";
+            } else {
+                console.error("Looker Studio embed iframe not found.");
+            }
+        });
+    </script>
 </body>
 </html>
